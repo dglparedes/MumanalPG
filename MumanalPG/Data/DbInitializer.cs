@@ -24,7 +24,7 @@ namespace MumanalPG.Data
 
         public async void Initialize()
         {
-            if (_db.Database.GetPendingMigrations().Count() > 0)
+            if (_db.Database.GetPendingMigrations().Any())
             {
                 _db.Database.Migrate();
             }
