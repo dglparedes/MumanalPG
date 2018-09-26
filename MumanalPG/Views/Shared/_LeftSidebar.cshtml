@@ -1,0 +1,167 @@
+@using MumanalPG.Utility
+<aside class="left-sidebar">
+<div class="d-flex no-block nav-text-box align-items-center">
+    <span>
+        <img src="img/logo-icon.png" alt="elegant admin template">
+    </span>
+    <a class="nav-lock waves-effect waves-dark ml-auto hidden-md-down" href="javascript:void(0)">
+        <i class="mdi mdi-toggle-switch"></i>
+    </a>
+    <a class="nav-toggler waves-effect waves-dark ml-auto hidden-sm-up" href="javascript:void(0)">
+        <i class="ti-menu ti-close"></i>
+    </a>
+</div>
+<!-- Sidebar scroll-->
+<div class="scroll-sidebar">
+<!-- Sidebar navigation-->
+<nav class="sidebar-nav">
+<ul id="sidebarnav">
+
+<li>
+    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+        <i class="ti-layout-grid2"></i><span class="hide-menu">Planificación</span>
+    </a>
+    <ul aria-expanded="false" class="collapse">
+        <li>
+            <a href="app-calendar.html">Plan de Procesos <i class="ti-calendar"></i></a>
+        </li>
+        <li>
+            <a href="app-chat.html">Plan Operativo <i class="ti-comment"></i></a>
+        </li>
+        <li>
+            <a href="app-ticket.html">Presupuesto <i class="ti-support"></i></a>
+        </li>
+        <li>
+            <a href="app-contact.html">Plan de Adquisiciones <i class="ti-user"></i></a>
+        </li>
+        <li>
+            <a href="app-contact2.html">Reportes <i class=" ti-list"></i></a>
+        </li>
+    </ul>
+</li>
+<li>
+    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+        <i class="ti-email"></i><span class="hide-menu">Prestaciones</span>
+    </a>
+    <ul aria-expanded="false" class="collapse">
+        <li>
+            <a href="app-email.html">Afiliaciones <i class="icon-envelope-open"></i></a>
+        </li>
+        <li>
+            <a href="app-email-detail.html">Ayuda Social Reversible <i class="ti-layout-media-left-alt"></i></a>
+        </li>
+        <li>
+            <a href="app-compose.html">Bono Cesantia <i class="icon-note"></i></a>
+        </li>
+        <li>
+            <a href="app-compose.html">Cuota Mortuoria <i class="icon-note"></i></a>
+        </li>
+        <li>
+            <a href="app-compose.html">Otros Servicios <i class="icon-note"></i></a>
+        </li>
+        <li>
+            <a href="app-compose.html">Reportes<i class="icon-note"></i></a>
+        </li>
+    </ul>
+</li>
+<li>
+    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+        <i class="ti-palette"></i><span class="hide-menu">Recursos Humanos </span>
+    </a>
+    <ul aria-expanded="false" class="collapse">
+        <li>
+            <a href="ui-cards.html">Adm. de Personal <i class="ti-layers-alt"></i></a>
+        </li>
+        <li>
+            <a href="ui-user-card.html">Planillas <i class="ti-user"></i></a>
+        </li>
+        <li>
+            <a href="ui-buttons.html">Reportes <i class="ti-layout-menu"></i></a>
+        </li>
+        
+    </ul>
+</li>
+<li class="nav-small-cap"></li>
+<li>
+    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+        <i class="ti-layout-media-right-alt"></i><span class="hide-menu">Admministrativo</span>
+    </a>
+    <ul aria-expanded="false" class="collapse">
+        <li>
+            <a href="form-basic.html">Compras <i class="ti-file"></i></a>
+        </li>
+        <li>
+            <a href="form-layout.html">Almacenes <i class="ti-files"></i></a>
+        </li>
+        <li>
+            <a href="form-addons.html">Activos Fijos <i class="ti-zip"></i></a>
+        </li>
+        <li>
+            <a href="form-material.html">Reportes <i class="ti-agenda"></i></a>
+        </li>
+        
+    </ul>
+</li>
+<li>
+    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+        <i class="ti-layout-accordion-merged"></i><span class="hide-menu">Financiero</span>
+    </a>
+    <ul aria-expanded="false" class="collapse">
+        <li>
+            <a href="table-basic.html">Adm. de Fondos <i class="ti-widgetized"></i></a>
+        </li>
+        <li>
+            <a href="table-layout.html">Cobranzas <i class="ti-layout-accordion-list"></i></a>
+        </li>
+        <li>
+            <a href="table-data-table.html">Alquileres <i class="ti-widget"></i></a>
+        </li>
+        <li>
+            <a href="table-footable.html">Pagos <i class="ti-layout-accordion-merged"></i></a>
+        </li>
+        <li>
+            <a href="table-jsgrid.html">Contabilidad <i class="ti-layout-placeholder"></i></a>
+        </li>
+        
+    </ul>
+</li>
+
+<li class="nav-small-cap"></li>
+<li>
+    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+        <i class="ti-gallery"></i><span class="hide-menu">Demo Productos</span>
+    </a>
+    <ul aria-expanded="false" class="collapse">
+        
+        <li>
+            <a asp-area="Admin" asp-controller="ProductTypes" asp-action="Index">Tipos de Producto <i class="ti-layout-menu-separated"></i></a>
+        </li>
+        <li>
+            <a asp-area="Admin" asp-controller="SpecialTags" asp-action="Index">Etiquetas Especiales <i class="mdi mdi-page-layout-header"></i></a>
+        </li>
+        <li>
+            <a asp-area="Admin" asp-controller="Products" asp-action="Index">Productos <i class="mdi mdi-page-layout-sidebar-left"></i></a>
+        </li>
+        <li>
+            <a asp-area="Admin" asp-controller="AdminUsers" asp-action="Index">Admin Usuarios <i class="ti-agenda"></i></a>
+        </li>
+        
+    </ul>
+</li>
+    @if (User.IsInRole(SD.SuperAdminEndUser) || User.IsInRole(SD.AdminEndUser))
+    {
+        <li>
+            <a class="waves-effect waves-dark" asp-area="Admin" asp-controller="Appointments" asp-action="Index">Citas
+                <i class="fa fa-circle-o text-danger"></i>
+             </a>
+        </li>
+
+    }
+
+<li class="nav-small-cap"></li>
+</ul>
+</nav>
+<!-- End Sidebar navigation -->
+</div>
+<!-- End Sidebar scroll-->
+</aside>

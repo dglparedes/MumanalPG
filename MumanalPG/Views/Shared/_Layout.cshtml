@@ -1,193 +1,162 @@
 ﻿@using Microsoft.AspNetCore.Http
 @using MumanalPG.Extensions
 @using MumanalPG.Utility
+@using Microsoft.AspNetCore.Identity
 
 @inject IHttpContextAccessor HttpContextAccessor
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon.png">
     <title>@ViewData["Title"] - MumanalPG</title>
 
-    <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
-        <link rel="stylesheet" href="~/css/jquery-ui.css" />
-        <link rel="stylesheet" href="~/css/jquery.timepicker.css" />
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-    </environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
-        <link rel="stylesheet" href="~/css/jquery-ui.css" />
-        <link rel="stylesheet" href="~/css/jquery.timepicker.css" />
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-    </environment>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <environment include="Development">
+            <link rel="stylesheet" href="~/lib/theme-elegant/css/morris.css"/>
+            <link rel="stylesheet" href="~/lib/theme-elegant/css/jquery.toast.css"/>
+            <link rel="stylesheet" href="~/lib/theme-elegant/css/c3.min.css"/>
+            <link rel="stylesheet" href="~/lib/theme-elegant/css/style.min.css"/>
+            <link rel="stylesheet" href="~/lib/theme-elegant/css/sweetalert.css"/>
+        </environment>
+    }
+    else
+    {
+        <environment include="Development">
+            <link rel="stylesheet" href="~/lib/theme-elegant/css/login-register-lock.css"/>
+            <link rel="stylesheet" href="~/lib/theme-elegant/css/style.min.css"/>
+            <link rel="stylesheet" href="~/lib/theme-elegant/css/sweetalert.css"/>
+        </environment>
+    }
+
 </head>
-<body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-        <a class="navbar-brand" href="#">MumERP</a>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item"><a class="nav-link" asp-area="Customer" asp-controller="Home" asp-action="Index">Inicio</a></li>
-                @if (User.IsInRole(SD.SuperAdminEndUser))
-                {
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Planificacion
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Plan de Procesos</a>
-                            <a class="dropdown-item" href="#">Plan Operativo</a>
-                            <a class="dropdown-item" href="#">Presupuesto</a>
-                            <a class="dropdown-item" href="#">Plan de Adquisiciones</a>
-                            <a class="dropdown-item" href="#">Reportes</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Prestaciones
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Afiliaciones</a>
-                            <a class="dropdown-item" href="#">Ayuda Social Reversible</a>
-                            <a class="dropdown-item" href="#">Bono Cesantia</a>
-                            <a class="dropdown-item" href="#">Cuota Mortuoria</a>
-                            <a class="dropdown-item" href="#">ASR Vivienda</a>
-                            <a class="dropdown-item" href="#">Otros Servicios</a>
-                            <a class="dropdown-item" href="#">Reportes</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            RRHH
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Administracion de Personal</a>
-                            <a class="dropdown-item" href="#">Control Personal</a>
-                            <a class="dropdown-item" href="#">Planillas</a>
-                            <a class="dropdown-item" href="#">Reportes</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Administrativo
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Compras</a>
-                            <a class="dropdown-item" href="#">Almacenes</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Activos Fijos</a>
-                            <a class="dropdown-item" href="#">Reportes</a>
-                        </div>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Financiero
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Administración de Fondos</a>
-                            <a class="dropdown-item" href="#">Cobranzas</a>
-                            <a class="dropdown-item" href="#">Alquileres</a>
-                            <a class="dropdown-item" href="#">Pagos</a>
-                            <a class="dropdown-item" href="#">Contabilidad</a>
-                        </div>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Demo Productos
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" asp-area="Admin" asp-controller="ProductTypes" asp-action="Index">Tipos de Producto</a>
-                            <a class="dropdown-item" asp-area="Admin" asp-controller="SpecialTags" asp-action="Index">Etiquetas Especiales</a>
-                            <a class="dropdown-item" asp-area="Admin" asp-controller="Products" asp-action="Index">Productos</a>
-                            <a class="dropdown-item" asp-area="Admin" asp-controller="AdminUsers" asp-action="Index">Admin Usuarios</a>
-                        </div>
-                    </li>
-
-                    @*<li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="ProductTypes" asp-action="Index">Tipos de Producto</a></li>*@
-                    @*<li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="SpecialTags" asp-action="Index">Etiquetas Especiales</a></li>*@
-                    @*<li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Products" asp-action="Index">Productos</a></li>*@
-                    @*<li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="AdminUsers" asp-action="Index">Admin Usuarios</a></li>*@
-                }
-                @if (User.IsInRole(SD.SuperAdminEndUser) || User.IsInRole(SD.AdminEndUser))
-                {
-                    <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Appointments" asp-action="Index">Citas</a></li>
-
-                }
-
-                @*@if (HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssShoppingCart") != null)
-                {
-                    <li style="color:white">
-                        <a asp-area="Customer" asp-controller="ShoppingCart" asp-action="Index" class="nav-link">
-                            <i class="fas fa-shopping-cart"></i> &nbsp;
-                            @{
-                                var count = HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssShoppingCart").Count;
-                            }
-                            (@count)
-                        </a>
-                    </li>
-
-                }
-                else
-                {
-                    <li style="color:white">
-                        <a asp-area="Customer" asp-controller="ShoppingCart" asp-action="Index" class="nav-link">
-                            <i class="fas fa-shopping-cart"></i> &nbsp;
-
-                            (0)
-                        </a>
-                    </li>
-
-                }*@
-            </ul>
-
-        </div>
-        <div>
-            <partial name="_LoginPartial" />
-        </div>
-    </nav>
-
-
-
-
-
-
-
-
-
-
-
-
-    <partial name="_CookieConsentPartial" />
-
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2018 - MumanalPG</p>
-        </footer>
+<body class="skin-blue fixed-layout lock-nav">
+<!-- ============================================================== -->
+<!-- Preloader - style you can find in spinners.css -->
+<!-- ============================================================== -->
+<div class="preloader">
+    <div class="loader">
+        <div class="loader__figure"></div>
+        <p class="loader__label">Sistema Integrado Mumanal</p>
     </div>
+</div>
+<!-- ============================================================== -->
+<!-- Main wrapper - style you can find in pages.scss -->
+<!-- ============================================================== -->
+<div id="main-wrapper">
 
-    <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-        <script src="~/js/jquery-ui.js" asp-append-version="true"></script>
-        <script src="~/js/jquery.timepicker.js" asp-append-version="true"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-        <script src="~/js/jquery-ui.js" asp-append-version="true"></script>
-        <script src="~/js/jquery.timepicker.js" asp-append-version="true"></script>
-    </environment>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <partial name="_Navbar"/>
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <partial name="_LeftSidebar"/>
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Bread crumb and right sidebar toggle -->
+                <!-- ============================================================== -->
+                <div class="row page-titles">
+                    <div class="col-md-5 align-self-center">
+                        <h4 class="text-themecolor text-uppercase">@ViewData["Title"]</h4>
+                    </div>
+                    <div class="col-md-7 align-self-center text-right">
+                        <div class="d-flex justify-content-end align-items-center">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="javascript:void(0)">Home</a>
+                                </li>
+                                <li class="breadcrumb-item active">Dashboard 1</li>
+                            </ol>
+                            
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Bread crumb and right sidebar toggle -->
+                <!-- ============================================================== -->
+                @RenderBody()
 
-    @RenderSection("Scripts", required: false)
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <partial name="_RightSidebar.cshtml"/>
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- footer -->
+        <!-- ============================================================== -->
+        <footer class="footer">
+            © @DateTime.Now.Year - Sistema Integrado Mumanal SIVER 2.0
+        </footer>
+        <!-- ============================================================== -->
+        <!-- End footer -->
+        <!-- ============================================================== -->
+    }
+    else
+    {
+        @RenderBody()
+    }
+
+</div>
+<!-- ============================================================== -->
+<!-- End Wrapper -->
+<!-- ============================================================== -->
+
+<environment include="Development">
+    <script src="~/lib/theme-elegant/js/jquery-3.2.1.min.js"></script>
+    <script src="~/lib/theme-elegant/js/popper.min.js"></script>
+    <script src="~/lib/theme-elegant/js/bootstrap.min.js"></script>
+    <script src="~/lib/theme-elegant/js/perfect-scrollbar.jquery.min.js"></script>
+    <script src="~/lib/theme-elegant/js/waves.js"></script>
+    <script src="~/lib/theme-elegant/js/sidebarmenu.js"></script>
+    <script src="~/lib/theme-elegant/js/custom.min.js"></script>
+    <script src="~/lib/theme-elegant/js/raphael-min.js"></script>
+    <script src="~/lib/theme-elegant/js/morris.min.js"></script>
+    <script src="~/lib/theme-elegant/js/jquery.sparkline.min.js"></script>
+    <script src="~/lib/theme-elegant/js/d3.min.js"></script>
+    <script src="~/lib/theme-elegant/js/c3.min.js"></script>
+    <script src="~/lib/theme-elegant/js/jquery.toast.js"></script>
+    <script src="~/lib/theme-elegant/js/sweetalert.min.js"></script>
+
+</environment>
+
+
+@RenderSection("Scripts", required: false)
 </body>
 </html>

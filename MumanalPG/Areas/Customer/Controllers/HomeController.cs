@@ -7,10 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using MumanalPG.Models;
 using MumanalPG.Data;
 using Microsoft.EntityFrameworkCore;
+using MumanalPG.Utility;
+using Microsoft.AspNetCore.Authorization;
 using MumanalPG.Extensions;
 
 namespace MumanalPG.Controllers
 {
+    [Authorize]
     [Area("Customer")]
     public class HomeController : Controller
     {

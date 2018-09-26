@@ -1,10 +1,8 @@
 ﻿@model MumanalPG.Models.ProductTypes
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Crear tipo de producto";
 }
 
-<br />
-<h2 class="text-info">Create Product Type</h2>
 
 <form method="post" asp-action="Create">
     <div class="p-4 border rounded">
@@ -16,12 +14,14 @@
             <div class="col-5">
                 <input asp-for="Name" class="form-control" />
             </div>
+            
             <span asp-validation-for="Name" class="text-danger"></span>
+            
         </div>
         <br />
         <div class="form-group">
-            <input type="submit" class="btn btn-primary" value="Create" />
-            <a asp-action="Index" class="btn btn-success">Back to List</a>
+            <input type="submit" class="btn btn-success" value="Crear" />
+            <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
         </div>
     </div>
 </form>
