@@ -22,7 +22,7 @@ File: scss
  *	12. Forms
  *	14. Component
  */
-@import url(fontawesome/css/fontawesome-all.min.css);
+@import url(fontawesome/css/all.min.css);
 @import url(simple-line-icons.css);
 @import url(weather-icons.min.css);
 @import url(themify-icons.css);
