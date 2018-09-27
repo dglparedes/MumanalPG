@@ -1,42 +1,31 @@
 ﻿@model IEnumerable<MumanalPG.Models.ProductTypes>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Tipos de Producto";
 }
 
-<br /><br />
-
 <div class="row">
-    <div class="col-6">
-        <h2 class="text-info"> Product Type List</h2>
-    </div>
-    <div class="col-6 text-right">
-        <a asp-action="Create" class="btn btn-info"><i class="fas fa-plus"></i>&nbsp; New Product Type</a>
+
+    <div class="col-12 text-right">
+        <a asp-action="Create" class="btn btn-primary" data-toggle="tooltip" title="Nuevo Tipo de Producto">
+            <i class="fas fa-plus"></i><span class="d-none d-sm-inline">&nbsp; Nuevo </span>
+        </a>
     </div>
 </div>
 
-<br />
-<div>
-    <table class="table table-striped border">
-        <tr class="table-info">
-            <th>
-                @Html.DisplayNameFor(m=>m.Name)
-            </th>
-            <th></th>
-            <th></th>
-        </tr>
+<br/>
+<div class="col-12 table-responsive">
+    <table class="table table-hover table-striped">
 
-        @foreach(var item in Model)
+        @foreach (var item in Model)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(m=>item.Name)
+                    @Html.DisplayFor(m => item.Name)
                 </td>
                 <td>
-                    <partial name="_TableButtonPartial" model="item.Id" />
+                    <partial name="_TableButtonPartial" model="item.Id"/>
                 </td>
             </tr>
-
         }
     </table>
 </div>
-

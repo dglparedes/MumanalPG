@@ -26,7 +26,7 @@
             <link rel="stylesheet" href="~/lib/theme-elegant/css/morris.css"/>
             <link rel="stylesheet" href="~/lib/theme-elegant/css/jquery.toast.css"/>
             <link rel="stylesheet" href="~/lib/theme-elegant/css/c3.min.css"/>
-            <link rel="stylesheet" href="~/lib/theme-elegant/css/style.min.css"/>
+            <link rel="stylesheet" href="~/lib/theme-elegant/css/style.css"/>
             <link rel="stylesheet" href="~/lib/theme-elegant/css/sweetalert.css"/>
         </environment>
     }
@@ -82,27 +82,32 @@
                 <!-- ============================================================== -->
                 <!-- Bread crumb and right sidebar toggle -->
                 <!-- ============================================================== -->
-                <div class="row page-titles">
-                    <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor text-uppercase">@ViewData["Title"]</h4>
-                    </div>
-                    <div class="col-md-7 align-self-center text-right">
-                        <div class="d-flex justify-content-end align-items-center">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item">
-                                    <a href="javascript:void(0)">Home</a>
-                                </li>
-                                <li class="breadcrumb-item active">Dashboard 1</li>
-                            </ol>
-                            
+                
+                <div class="card p-0">
+                    <div class="card-body pt-0 pb-0">
+                        <div class="row page-titles pt-0 pb-0">
+                            <div class="col-md-5 align-self-center">
+                                <h4 class="text-themecolor text-uppercase">@ViewData["Title"]</h4>
+                            </div>
+                            <div class="col-md-7 align-self-center text-right">
+                                <div class="d-flex justify-content-end align-items-center">
+                                    <breadcrumb></breadcrumb>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                 </div>
+                
                 <!-- ============================================================== -->
                 <!-- End Bread crumb and right sidebar toggle -->
                 <!-- ============================================================== -->
-                @RenderBody()
-
+                <div class="card">
+                    <div class="card-body">
+                        @RenderBody()
+                    </div>
+                </div>
+                
                 <!-- ============================================================== -->
                 <!-- Right sidebar -->
                 <!-- ============================================================== -->

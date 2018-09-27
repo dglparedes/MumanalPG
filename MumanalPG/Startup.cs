@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using MumanalPG.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SmartBreadcrumbs;
 
 namespace MumanalPG
 {
@@ -51,6 +52,7 @@ namespace MumanalPG
                 options.IdleTimeout = TimeSpan.FromMinutes(30);
                 options.Cookie.HttpOnly = true;
             });
+		    services.UseBreadcrumbs(GetType().Assembly);
 
         }
 

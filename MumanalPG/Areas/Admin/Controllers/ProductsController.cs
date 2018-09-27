@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SmartBreadcrumbs;
 
 namespace MumanalPG.Controllers
 {
@@ -39,7 +40,7 @@ namespace MumanalPG.Controllers
 
         }
 
-
+        [Breadcrumb("Productos")]
         public async Task<IActionResult> Index()
         {
             var products = _db.Products.Include(m => m.ProductTypes).Include(m => m.SpecialTags);

@@ -8,6 +8,7 @@ using MumanalPG.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SmartBreadcrumbs;
 
 namespace MumanalPG.Areas.Admin.Controllers
 {
@@ -23,12 +24,14 @@ namespace MumanalPG.Areas.Admin.Controllers
             _db = db;
         }
 
+        [Breadcrumb("Tipos de Producto")]
         public IActionResult Index()
         {
             return View(_db.ProductTypes.ToList());
         }
 
         //GET Create Action Method
+        [Breadcrumb("Ccrear Tipo de Producto")]
         public IActionResult Create()
         {
             return View();
@@ -50,6 +53,7 @@ namespace MumanalPG.Areas.Admin.Controllers
 
 
         //GET Edit Action Method
+        [Breadcrumb("Modificar Tipo de Producto")]
         public async Task<IActionResult> Edit(int? id)
         {
             if(id==null)

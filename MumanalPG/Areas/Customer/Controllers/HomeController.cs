@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using MumanalPG.Utility;
 using Microsoft.AspNetCore.Authorization;
 using MumanalPG.Extensions;
+using SmartBreadcrumbs;
 
 namespace MumanalPG.Controllers
 {
@@ -25,6 +26,7 @@ namespace MumanalPG.Controllers
             _db = db;
         }
 
+        [DefaultBreadcrumb("Inicio", FromAction = "Home.Index")]
         public async Task<IActionResult> Index()
         {
             var productList = await _db.Products.Include(m => m.ProductTypes).Include(m => m.SpecialTags).ToListAsync();
