@@ -330,21 +330,126 @@ if ( typeof Object.create !== 'function' ) {
             }
         }
     };
+    
+    $.toastInfo = function(message) {
+        var toast = Object.create(Toast);
+        var options = {
+            heading: 'Información',
+            text: message,
+            bgColor: '#0E69BF',
+            loaderBg: '#09467F',
+            icon: 'info'
+        };
+        toast.init(options, this);
+
+        return {
+
+            reset: function ( what ) {
+                toast.reset( what );
+            },
+
+            update: function( options ) {
+                toast.update( options );
+            }
+        }
+    };
+
+    $.toastSuccess = function(message) {
+        var toast = Object.create(Toast);
+        var options = {
+            heading: 'Solicitud Satisfactoria',
+            text: message,
+            loaderBg: '#00c851',
+            icon: 'success'
+        };
+        toast.init(options, this);
+
+        return {
+
+            reset: function ( what ) {
+                toast.reset( what );
+            },
+
+            update: function( options ) {
+                toast.update( options );
+            }
+        }
+    };
+
+    $.toastWarning = function(message) {
+        var toast = Object.create(Toast);
+        var options = {
+            heading: 'Advertencia',
+            text: message,
+            loaderBg: '#ffbc34',
+            icon: 'warning'
+        };
+        toast.init(options, this);
+
+        return {
+
+            reset: function ( what ) {
+                toast.reset( what );
+            },
+
+            update: function( options ) {
+                toast.update( options );
+            }
+        }
+    };
+
+    $.toastError = function(message) {
+        var toast = Object.create(Toast);
+        var options = {
+            heading: 'Error',
+            text: message,
+            loaderBg: '#ff6849',
+            icon: 'error'
+        };
+        toast.init(options, this);
+
+        return {
+
+            reset: function ( what ) {
+                toast.reset( what );
+            },
+
+            update: function( options ) {
+                toast.update( options );
+            }
+        }
+    };
+
+    $.toastMsg = function(type, message) {
+        switch (type) {
+            case "info":
+                $.toastInfo(message);
+                break;
+            case "success":
+                $.toastSuccess(message);
+                break;
+            case "warning":
+                $.toastWarning(message);
+                break;
+            case "error":
+                $.toastError(message);
+                break;
+        }
+    };
 
     $.toast.options = {
         text: '',
         heading: '',
         showHideTransition: 'fade',
         allowToastClose: true,
-        hideAfter: 3000,
         loader: true,
         loaderBg: '#9EC600',
-        stack: 5,
-        position: 'bottom-left',
+        position: 'bottom-right',
         bgColor: false,
         textColor: false,
         textAlign: 'left',
-        icon: false,
+        hideAfter: 7000,
+        stack: 6,
         beforeShow: function () {},
         afterShown: function () {},
         beforeHide: function () {},

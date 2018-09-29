@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,36 +6,35 @@ using Microsoft.AspNetCore.Mvc;
 using MumanalPG.Models;
 using MumanalPG.Data;
 using Microsoft.EntityFrameworkCore;
-using MumanalPG.Utility;
 using Microsoft.AspNetCore.Authorization;
+using MumanalPG.Areas;
 using MumanalPG.Extensions;
+using MumanalPG.Utility;
 using SmartBreadcrumbs;
 
 namespace MumanalPG.Controllers
 {
     [Authorize]
     [Area("Customer")]
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-
-        private readonly ApplicationDbContext _db;
-
-        public HomeController(ApplicationDbContext db)
+        public HomeController(ApplicationDbContext db) : base(db)
         {
-            _db = db;
+            
         }
 
-        [DefaultBreadcrumb("Inicio", FromAction = "Home.Index")]
+        [DefaultBreadcrumb("Inicio")]
+        [Route("Admin")]
         public async Task<IActionResult> Index()
         {
-            var productList = await _db.Products.Include(m => m.ProductTypes).Include(m => m.SpecialTags).ToListAsync();
-
+            var productList = await DB.Products.Include(m => m.ProductTypes).Include(m => m.SpecialTags).ToListAsync();
+            SetFlashInfo("Esto es una prueba");
             return View(productList);
         }
 
         public async Task<IActionResult> Details(int id)
         {
-            var product = await _db.Products.Include(m => m.ProductTypes).Include(m => m.SpecialTags).Where(m=>m.Id==id).FirstOrDefaultAsync();
+            var product = await DB.Products.Include(m => m.ProductTypes).Include(m => m.SpecialTags).Where(m=>m.Id==id).FirstOrDefaultAsync();
 
 
             return View(product);

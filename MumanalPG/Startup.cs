@@ -76,7 +76,7 @@ namespace MumanalPG
             app.UseCookiePolicy();
 
             dbInitializer.Initialize();
-            app.UseAuthentication();
+	        app.UseAuthentication();
             app.UseSession();
             app.UseMvc(routes =>
             {
@@ -85,8 +85,6 @@ namespace MumanalPG
                   template: "{area=Customer}/{controller=Home}/{action=Index}/{id?}"
                 );
             });
-
-
 
         }
     }

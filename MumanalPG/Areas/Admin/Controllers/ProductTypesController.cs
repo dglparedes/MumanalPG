@@ -14,24 +14,21 @@ namespace MumanalPG.Areas.Admin.Controllers
 {
     [Authorize(Roles = SD.SuperAdminEndUser)]
     [Area("Admin")]
-    public class ProductTypesController : Controller
+    public class ProductTypesController : BaseController
     {
 
-        private readonly ApplicationDbContext _db;
-
-        public ProductTypesController( ApplicationDbContext db)
+        public ProductTypesController( ApplicationDbContext db): base(db)
         {
-            _db = db;
         }
 
         [Breadcrumb("Tipos de Producto")]
         public IActionResult Index()
         {
-            return View(_db.ProductTypes.ToList());
+            return View(DB.ProductTypes.ToList());
         }
 
         //GET Create Action Method
-        [Breadcrumb("Ccrear Tipo de Producto")]
+        [Breadcrumb("Crear",FromAction = "ProductTypes.Index")]
         public IActionResult Create()
         {
             return View();
@@ -44,8 +41,9 @@ namespace MumanalPG.Areas.Admin.Controllers
         {
             if(ModelState.IsValid)
             {
-                _db.Add(productTypes);
-                await _db.SaveChangesAsync();
+                DB.Add(productTypes);
+                await DB.SaveChangesAsync();
+                SetFlashSuccess("Se ha creado de forma correcta.");
                 return RedirectToAction(nameof(Index));
             }
             return View(productTypes);
@@ -61,7 +59,7 @@ namespace MumanalPG.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var productType = await _db.ProductTypes.FindAsync(id);
+            var productType = await DB.ProductTypes.FindAsync(id);
             if (productType == null)
             {
                 return NotFound();
@@ -82,8 +80,8 @@ namespace MumanalPG.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                _db.Update(productTypes);
-                await _db.SaveChangesAsync();
+                DB.Update(productTypes);
+                await DB.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(productTypes);
@@ -97,7 +95,7 @@ namespace MumanalPG.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var productType = await _db.ProductTypes.FindAsync(id);
+            var productType = await DB.ProductTypes.FindAsync(id);
             if (productType == null)
             {
                 return NotFound();
@@ -115,7 +113,7 @@ namespace MumanalPG.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var productType = await _db.ProductTypes.FindAsync(id);
+            var productType = await DB.ProductTypes.FindAsync(id);
             if (productType == null)
             {
                 return NotFound();
@@ -129,9 +127,9 @@ namespace MumanalPG.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var productTypes = await _db.ProductTypes.FindAsync(id);
-            _db.ProductTypes.Remove(productTypes);
-            await _db.SaveChangesAsync();
+            var productTypes = await DB.ProductTypes.FindAsync(id);
+            DB.ProductTypes.Remove(productTypes);
+            await DB.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 

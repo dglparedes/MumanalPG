@@ -1,6 +1,4 @@
 ﻿@using Microsoft.AspNetCore.Http
-@using MumanalPG.Extensions
-@using MumanalPG.Utility
 @using Microsoft.AspNetCore.Identity
 
 @inject IHttpContextAccessor HttpContextAccessor
@@ -82,7 +80,7 @@
                 <!-- ============================================================== -->
                 <!-- Bread crumb and right sidebar toggle -->
                 <!-- ============================================================== -->
-                
+
                 <div class="card p-0">
                     <div class="card-body pt-0 pb-0">
                         <div class="row page-titles pt-0 pb-0">
@@ -98,7 +96,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- ============================================================== -->
                 <!-- End Bread crumb and right sidebar toggle -->
                 <!-- ============================================================== -->
@@ -107,7 +105,7 @@
                         @RenderBody()
                     </div>
                 </div>
-                
+
                 <!-- ============================================================== -->
                 <!-- Right sidebar -->
                 <!-- ============================================================== -->
@@ -127,7 +125,7 @@
         <!-- footer -->
         <!-- ============================================================== -->
         <footer class="footer">
-            © @DateTime.Now.Year - Sistema Integrado Mumanal SIVER 2.0
+            © @DateTime.Now.Year - Sistema Integrado Mumanal SI.VER 2.0
         </footer>
         <!-- ============================================================== -->
         <!-- End footer -->
@@ -163,5 +161,13 @@
 
 
 @RenderSection("Scripts", required: false)
+<script>
+    $(function() {
+        var type = '@TempData["FlashMsgType"]';
+        var message = '@TempData["FlashMsg"]';
+        $.toastMsg(type, message);
+        
+    });
+</script>
 </body>
 </html>
