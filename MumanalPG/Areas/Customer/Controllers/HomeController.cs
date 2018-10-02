@@ -24,6 +24,7 @@ namespace MumanalPG.Controllers
         }
 
         [DefaultBreadcrumb("Inicio")]
+        [Route("/")]
         [Route("Admin")]
         public async Task<IActionResult> Index()
         {
